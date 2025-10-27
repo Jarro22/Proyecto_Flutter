@@ -25,14 +25,15 @@ class MyHome extends StatelessWidget {
       children: <Widget>[
         descriptionPlace,
         reviewList,
-        CardImage("imagenes/images/.jpg"),
+        CardImage("assets/imagenes/paisaje.jpeg"),
+
       ],
     );
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
-        title: const Text("My Places"),
+        title: const Text("Paisajes"),
       ),
       body: Stack(
         children: <Widget>[
