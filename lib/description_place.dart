@@ -1,94 +1,76 @@
 import 'package:flutter/material.dart';
+import 'package:proyeto_flutter/rounded_button.dart';
 
 class DescriptionPlace extends StatelessWidget {
+  final String textoTitulo;
+  final int cantidadEstrellas;
+  final String textoDescripcion;
 
-  String textoTitulo;
-  int cantidadEstrellas;
-  String textoDescripcion;
-
-  DescriptionPlace(this.textoTitulo, this.cantidadEstrellas, this.textoDescripcion);
+  const DescriptionPlace(this.textoTitulo, this.cantidadEstrellas, this.textoDescripcion, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     final titulo = Container(
-      margin: EdgeInsets.only(
-          right: 20
-      ),
+      margin: const EdgeInsets.only(right: 20),
       child: Text(
         textoTitulo,
-        style: TextStyle(
-            fontFamily: "Lato",
-            fontSize: 38,
-            fontWeight: FontWeight.bold
+        style: const TextStyle(
+          fontFamily: "Lato",
+          fontSize: 38,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
 
     final estrella = Container(
-      margin: EdgeInsets.only(
-          right: 5
-      ),
-      child: Icon(
+      margin: const EdgeInsets.only(right: 5),
+      child: const Icon(
         Icons.star,
         color: Colors.amber,
       ),
     );
 
     final estrellaBorde = Container(
-      margin: EdgeInsets.only(
-          right: 5
-      ),
-      child: Icon(
-          Icons.star,
-          color: Colors.black54
+      margin: const EdgeInsets.only(right: 5),
+      child: const Icon(
+        Icons.star,
+        color: Colors.black54,
       ),
     );
 
-    //fila estrella
-
-    List<Container> estrellas = [];
+    // Generar estrellas según cantidad
+    List<Widget> estrellas = [];
     for (int i = 0; i < 5; i++) {
-      if (i < cantidadEstrellas) {
-        estrellas.add(estrella);
-      } else {
-        estrellas.add(estrellaBorde);
-      }
+      estrellas.add(i < cantidadEstrellas ? estrella : estrellaBorde);
     }
 
-
-    final filaEstrellas = Row(
-      children: estrellas,
-    );
+    final filaEstrellas = Row(children: estrellas);
 
     final filaTitulo = Row(
       children: <Widget>[
         titulo,
-        filaEstrellas
+        filaEstrellas,
       ],
     );
 
     final descripcion = Container(
-      margin: EdgeInsets.only(
-          top: 10
-      ),
+      margin: const EdgeInsets.only(top: 10),
       child: Text(
         textoDescripcion,
-        style: TextStyle(
-            fontFamily: "Lato",
-            color: Colors.black54
+        style: const TextStyle(
+          fontFamily: "Lato",
+          color: Colors.black54,
         ),
       ),
     );
 
-    final descriptionPlace = Column(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         filaTitulo,
-        descripcion
+        descripcion,
+        RoundedButton("Navigate"),
       ],
     );
-
-    return descriptionPlace;
   }
-
 }
